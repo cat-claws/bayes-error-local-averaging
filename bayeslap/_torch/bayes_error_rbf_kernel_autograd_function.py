@@ -33,7 +33,7 @@ class BayesErrorRBF(Function):
 				class_mask = (y == c).float()
 				posteriors[start:end, c] = (sims * class_mask).sum(dim=1) / Z.squeeze(1)
 	
-			y_max = torch.argmax(posteriors, dim=1)
+			y_max = torch.argmax(posteriors[start:end], dim=1)
 			# y_true = y[start:end]
 			# total_error += (y_max != y_true).float().sum().item()
 	
