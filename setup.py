@@ -10,7 +10,7 @@ requirements = [
 
 setup(
     # Metadata
-    name='bayes-error-local-averaging',
+    name='bayeslap',
     version=VERSION,
     author='cat-claws',
     author_email='47313357+cat-claws@users.noreply.github.com',
