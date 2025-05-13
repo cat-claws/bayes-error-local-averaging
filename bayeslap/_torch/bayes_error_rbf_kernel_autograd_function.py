@@ -9,7 +9,7 @@ class BayesErrorRBF(Function):
 		sigma_sq = sigma ** 2
 		grads = torch.zeros_like(X)
 		# total_error = 0.0
-		posteriors = torch.zeros(N, num_classes, device=device)
+		posteriors = torch.zeros(N, num_classes, device=X.device)
 	
 		for start in trange(0, N, chunk_size, desc="Forward"):
 			end = min(start + chunk_size, N)
