@@ -50,7 +50,7 @@ class BayesErrorRBF(Function):
 	
 		ctx.save_for_backward(grads)
 		# return torch.tensor(total_error / N, device=X.device, dtype=X.dtype)
-		return 1.0 - posteriors.max(dim=1).values
+		return (1.0 - posteriors.max(dim=1).values).mean()
 	
 	@staticmethod
 	def backward(ctx, grad_output):
