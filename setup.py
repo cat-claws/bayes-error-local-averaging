@@ -11,7 +11,7 @@ requirements = [
 
 setup(
     # Metadata
-    name='sharpen',
+    name='bayeslap',
     version=VERSION,
     author='cat-claws',
     author_email='47313357+cat-claws@users.noreply.github.com',
