@@ -1,1 +1,2 @@
-from ._numpy.bayes_error_rbf_kernel import bayes_error_numpy
+from _numpy.bayes_error_rbf_kernel import bayes_error_numpy
+from _torch.bayes_error_rbf_kernel import bayes_error_torch
