@@ -35,8 +35,8 @@ class BayesErrorLogistic(Function):
 				posteriors[start:end, c] = (sims * class_mask).sum(dim=1) / Z.squeeze(1)
 	
 			y_max = torch.argmax(posteriors[start:end], dim=1)  # [B]
-			y_true = y_chunk
-			total_error += (y_max != y_true).float().sum().item()
+			# y_true = y_chunk
+			# total_error += (y_max != y_true).float().sum().item()
 	
 			label_match = (y.unsqueeze(0) == y_max.unsqueeze(1)).float()  # [B, N]
 			N_yhat = (sims * label_match).sum(dim=1)  # [B]
