@@ -15,10 +15,10 @@ def bayes_error_torch(X, y, sigma, num_classes, batch_size=512):
 		sims = torch.sigmoid(dot_products)  # [B, N]
 	
 		# Zero out self-similarity for in-batch indices
-		if end - start == N:
-			sims.fill_diagonal_(0.0)  # full batch = full set
-		else:
-			sims[:, start:end] -= torch.diag_embed(torch.diagonal(sims[:, start:end]))
+		# if end - start == N:
+		# 	sims.fill_diagonal_(0.0)  # full batch = full set
+		# else:
+		sims[:, start:end] -= torch.diag_embed(torch.diagonal(sims[:, start:end]))
 	
 		Z = sims.sum(dim=1, keepdim=True) + 1e-8  # [B, 1]
 	
