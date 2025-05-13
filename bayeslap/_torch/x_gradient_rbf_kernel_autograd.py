@@ -1,3 +1,5 @@
+import torch
+
 def bayes_error_grad_torch(X, y, sigma, num_classes):
 	"""
 	Compute gradient of Bayes error w.r.t. X using autograd (Torch version).
