@@ -1,3 +1,5 @@
+import torch
+
 class BayesErrorImageFeature(torch.autograd.Function):
 	@staticmethod
 	def forward(ctx, images, labels, embedding_model, bayes_error_calculator, batch_size = 128):
