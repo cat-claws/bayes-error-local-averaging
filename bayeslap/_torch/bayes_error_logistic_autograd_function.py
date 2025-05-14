@@ -1,6 +1,5 @@
 import torch
 from torch.autograd import Function
-from tqdm import trange
 
 class BayesErrorLogistic(Function):
 	@staticmethod
@@ -10,7 +9,7 @@ class BayesErrorLogistic(Function):
 		# total_error = 0.0
 		posteriors = torch.zeros(N, num_classes, device=X.device)
 	
-		for start in trange(0, N, chunk_size, desc="Forward"):
+		for start in range(0, N, chunk_size, desc="Forward"):
 			end = min(start + chunk_size, N)
 			X_chunk = X[start:end]  # [B, D]
 			y_chunk = y[start:end]
