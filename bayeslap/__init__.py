@@ -2,5 +2,5 @@ from bayeslap._numpy.bayes_error_rbf_kernel import bayes_error_numpy
 from bayeslap._torch.bayes_error_rbf_kernel import bayes_error_torch
 from bayeslap._torch.bayes_error_rbf_kernel_autograd_function import BayesErrorRBF
 from bayeslap._torch.bayes_error_logistic_autograd_function import BayesErrorLogistic
-import ._torch
-import ._numpy
+import bayeslap._torch
+import bayeslap._numpy
