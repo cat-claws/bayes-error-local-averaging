@@ -1,6 +1,5 @@
 import torch
 from torch.autograd import Function
-from tqdm import trange
 
 class BayesErrorRBF(Function):
 	@staticmethod
@@ -8,10 +7,9 @@ class BayesErrorRBF(Function):
 		N, D = X.shape
 		sigma_sq = sigma ** 2
 		grads = torch.zeros_like(X)
-		# total_error = 0.0
 		posteriors = torch.zeros(N, num_classes, device=X.device)
 	
-		for start in trange(0, N, chunk_size, desc="Forward"):
+		for start in range(0, N, chunk_size, desc="Forward"):
 			end = min(start + chunk_size, N)
 			X_chunk = X[start:end]
 			B = end - start
@@ -28,14 +26,11 @@ class BayesErrorRBF(Function):
 	
 			Z = sims.sum(dim=1, keepdim=True) + 1e-8  # [B, 1]
 	
-			# posteriors = torch.zeros(B, num_classes, device=X.device)
 			for c in range(num_classes):
 				class_mask = (y == c).float()
 				posteriors[start:end, c] = (sims * class_mask).sum(dim=1) / Z.squeeze(1)
 	
 			y_max = torch.argmax(posteriors[start:end], dim=1)
-			# y_true = y[start:end]
-			# total_error += (y_max != y_true).float().sum().item()
 	
 			# Compute gradient
 			label_match = (y.unsqueeze(0) == y_max.unsqueeze(1)).float()  # [B, N]
@@ -49,7 +44,6 @@ class BayesErrorRBF(Function):
 			grads -= grad_contrib.sum(dim=0)
 	
 		ctx.save_for_backward(grads)
-		# return torch.tensor(total_error / N, device=X.device, dtype=X.dtype)
 		return (1.0 - posteriors.max(dim=1).values).mean()
 	
 	@staticmethod
